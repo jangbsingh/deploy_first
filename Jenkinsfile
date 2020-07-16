@@ -12,7 +12,7 @@ pipeline {
                 }
                 stage('Deploy') {
                         steps{
-                                sshagent(['root_jb']) {
+                                sshagent(['l_root']) {
                                         sh """
                                                 ssh root@192.168.0.113:/usr/local/tomcat9/bin/shutdown.sh
                                                 scp -o StrictHostKeyChecking=no  target/jbs.war  root@192.168.0.113:/usr/local/tomcat9/webapps/
