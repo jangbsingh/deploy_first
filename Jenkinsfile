@@ -12,12 +12,12 @@ pipeline {
                 }
                 stage('Deploy') {
                         steps{
-                                sshagent(['M_ROOT']) {
+                                sshagent(['72bc7e6f-d5cb-4c6d-8efc-5b408354329a']) {
                                         sh """
 						pwd
-                                                ssh ansible@192.168.0.113 /usr/local/tomcat9/bin/shutdown.sh
-                                                scp -o StrictHostKeyChecking=no  target/jbs.war  ansible@192.168.0.113:/usr/local/tomcat9/webapps/
-                                        	ssh ansible@192.168.0.113 /usr/local/tomcat9/bin/startup.sh
+                                                ssh root@192.168.0.113 /usr/local/tomcat9/bin/shutdown.sh
+                                                scp -o StrictHostKeyChecking=no  target/jbs.war  root@192.168.0.113:/usr/local/tomcat9/webapps/
+                                        	ssh root@192.168.0.113 /usr/local/tomcat9/bin/startup.sh
                                         """
                                 }
                         }
