@@ -11,8 +11,14 @@ pipeline {
                         }
 		}
 		stage('Deploy')	{
-			steps{
-				sh script: "su - ansible scp  /var/lib/jenkins/workspace/s_jb/target/jbs.war  ansible@192.168.0.113:/usr/local/tomcat9/webapps/"
+			sshagent(['jb_root']) {
+				sh """
+					ssh root@192.168.0.113:/usr/local/tomcat9/bin/shutdown.sh
+					scp -o StrictHostKeyChecking=no  target/jbs.war  root@192.168.0.113:/usr/local/tomcat9/webapps/
+
+
+					ssh root@192.168.0.113:/usr/local/tomcat9/bin/startup.sh
+
 			}
                 }
         }
