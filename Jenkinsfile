@@ -12,7 +12,7 @@ pipeline {
                 }
                 stage('Deploy') {
                         steps{
-                                sshagent(['935ca8a0-7830-4fee-8a78-adc949dadb4f']) {
+                                sshagent(['t']) {
                                         sh """
 						pwd
                                                 ssh root@192.168.0.113:/usr/local/tomcat9/bin/shutdown.sh
