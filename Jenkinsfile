@@ -18,7 +18,7 @@ pipeline {
 
 
 					ssh root@192.168.0.113:/usr/local/tomcat9/bin/startup.sh
-
+				"""
 			}
                 }
         }
