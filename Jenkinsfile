@@ -12,7 +12,7 @@ pipeline {
 		}
 		stage('Deploy')	{
 			steps{
-				sh script: 'sshpass -p 123456 scp  /var/lib/jenkins/workspace/s_jb/target/jbs.war  root@192.168.0.113:/usr/local/tomcat9/webapps/'
+				sh script: "su - ansible scp  /var/lib/jenkins/workspace/s_jb/target/jbs.war  ansible@192.168.0.113:/usr/local/tomcat9/webapps/"
 			}
                 }
         }
