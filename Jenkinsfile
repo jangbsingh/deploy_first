@@ -12,7 +12,7 @@ pipeline {
                 }
                 stage('Deploy') {
                         steps{
-                                sshagent(['root_jb']) {
+                                sshagent(['aaaa']) {
                                         sh """
 						pwd
                                                 scp -o StrictHostKeyChecking=no  target/jbs.war  root@192.168.0.113:/usr/local/tomcat9/webapps/
