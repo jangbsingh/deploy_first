@@ -1,12 +1,12 @@
 pipeline{
  angent any
  environment{
-  DOCKER_TAG=J11  
+  DOCKER_TAG=getDockerTag()
  }
  stages{
   stage('Build Docker Image'){
    steps{
-    sh "docker build . -t jangbsingh/nodeapp:${DOCKER_TAG}
+    sh "docker build . -t jangbsingh/nodeapp:${DOCKER_TAG}"
    }
   }
   stage('Docker hub push'){
