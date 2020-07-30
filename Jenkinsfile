@@ -21,6 +21,7 @@ pipeline{
    steps{
     sh " chmod +x changeTag.sh"
 	sh " ./changeTag.sh ${DOCKER_TAG}"
+        sh " rm  -rf pods.yml"
 	script{
 	 try{
 	  sh " kubectl apply -f . "
