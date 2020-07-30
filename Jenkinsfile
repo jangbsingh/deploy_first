@@ -1,7 +1,7 @@
 pipeline{
  angent any
  environment{
-  DOCKER_TAG=getDockerTag()
+  DOCKER_TAG=J11  ######getDockerTag()
  }
  stages{
   stage('Build Docker Image'){
