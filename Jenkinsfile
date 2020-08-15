@@ -12,22 +12,25 @@ pipeline{
   stage('Docker hub push'){
    steps{
     withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
-	 sh " docker login -u jangbsingh -p ${dockerHubPwd}"
-	 sh " docker push jangbsingh/nodeapp:${DOCKER_TAG}"
-	}
+         sh " docker login -u jangbsingh -p ${dockerHubPwd}"
+         sh " docker push jangbsingh/nodeapp:${DOCKER_TAG}"
+        }
    }
   }
   stage('Deploy to k8s'){
    steps{
     sh " chmod +x changeTag.sh"
-	sh " ./changeTag.sh ${DOCKER_TAG}"
-        sh " rm  -rf pods.yml"
-	script{
-	 try{
-	  sh " kubectl apply -f . "
-	 }catch(error){
-	  sh " kubectl create -f . "
-	 }
+    sh " ./changeTag.sh ${DOCKER_TAG}"
+    sh " rm  -rf pods.yml"
+    sshagent(['ad_ubuntu']) {
+		sh "scp -o StricHostKeyChecking=no services.yml node-app.yml aditya-ubuntu@192.168.0.115:/home/aditya-ubuntu/"
+		script{
+         try{
+          sh " ssh aditya-ubuntu@192.168.0.115 kubectl apply -f . "
+         }catch(error){
+          sh " ssh aditya-ubuntu@192.168.0.115 kubectl create -f . "
+         }
+        }
 	}
    }
   }
@@ -36,4 +39,5 @@ pipeline{
 def getDockerTag(){
  def tag = sh script: 'git rev-parse HEAD', returnStdout: true
   return tag
-} 
+}
+
