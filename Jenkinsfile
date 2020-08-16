@@ -25,7 +25,7 @@ pipeline{
     sh " who am i "
     sh " rm  -rf pods.yml"
     sshagent(['jen']) {
-		sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml jenkins@192.168.0.115:/home/jenkins"
+		sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.0.115  mkdir /tmp/jenkins"
 		script{
          try{
           sh " ssh root@192.168.0.115 kubectl apply -f . "
