@@ -23,7 +23,7 @@ pipeline{
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
     sshagent(['935ca8a0-7830-4fee-8a78-adc949dadb4f']) {
-		sh "scp -or StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.0.115:/tmp/ubuntu_jb/"
+		sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.0.115:/root/jb/"
 		script{
          try{
           sh " ssh root@192.168.0.115 kubectl apply -f . "
