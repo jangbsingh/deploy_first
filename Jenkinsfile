@@ -10,7 +10,7 @@ pipeline{
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
     sshagent(['node-ub']) {
-	    sh "scp root@192.168.0.115 ls /tmp/"
+	    sh "shh root@192.168.0.115 ls /tmp/"
 	script{
          try{
           sh " ssh root@192.168.0.115 kubectl apply -f . "
