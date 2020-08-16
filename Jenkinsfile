@@ -9,7 +9,7 @@ pipeline{
     sh " chmod +x changeTag.sh"
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
-    sshagent(['k_ll']) {
+    sshagent(['ad_33']) {
 		sh "ssh -o StrictHostKeyChecking=no aditya1@192.168.0.115 ls /tmp"
 		script{
          try{
