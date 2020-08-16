@@ -21,6 +21,7 @@ pipeline{
    steps{
     sh " chmod +x changeTag.sh"
     sh " ./changeTag.sh ${DOCKER_TAG}"
+    sh " pwd "
     sh " rm  -rf pods.yml"
     sshagent(['jen']) {
 		sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml jenkins@192.168.0.115:/home/jenkins"
