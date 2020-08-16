@@ -9,13 +9,12 @@ pipeline{
     sh " chmod +x changeTag.sh"
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
-    sshagent(['node22']) {
-		sh " ssh -o StrictHostKeyChecking=no root@192.168.0.113 ls /tmp/ "
-		script{
+    sshagent(['node-ub']) {
+	script{
          try{
-          sh " ssh aditya-ubuntu@192.168.0.115 kubectl apply -f . "
+          sh " ssh root@192.168.0.115 kubectl apply -f . "
          }catch(error){
-          sh " ssh aditya-ubuntu@192.168.0.115 kubectl create -f . "
+          sh " ssh root@192.168.0.115 kubectl create -f . "
          }
         }
 	}
