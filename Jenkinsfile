@@ -24,7 +24,7 @@ pipeline{
     sh " pwd "
     sh " who am i "
     sh " rm  -rf pods.yml"
-    sshagent(['jen']) {
+    sshagent(['ad_r_u']) {
 		sh "ssh -o StrictHostKeyChecking=no jenkins@192.168.0.115  mkdir /tmp/jenkins"
 		script{
          try{
