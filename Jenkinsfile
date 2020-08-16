@@ -23,7 +23,7 @@ pipeline{
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
     sshagent(['jen']) {
-		sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml root@192.168.0.115:/root/jb/"
+		sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml jenkins@192.168.0.115:/home/jenkins"
 		script{
          try{
           sh " ssh root@192.168.0.115 kubectl apply -f . "
