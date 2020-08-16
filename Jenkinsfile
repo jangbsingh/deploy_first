@@ -10,7 +10,7 @@ pipeline{
     sh " ./changeTag.sh ${DOCKER_TAG}"
     sh " rm  -rf pods.yml"
     sshagent(['ad_33']) {
-		sh "ssh -o StrictHostKeyChecking=no aditya1@192.168.0.115 ls /tmp"
+		sh "ssh -o StrictHostKeyChecking=no aditya1@192.168.0.115 pwd "
 		script{
          try{
           sh " ssh aditya-ubuntu@192.168.0.115 kubectl apply -f . "
